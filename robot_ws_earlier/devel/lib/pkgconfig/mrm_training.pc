@@ -1,8 +1,0 @@
-prefix=/home/joshua/robot_ws_earlier/devel
-
-Name: mrm_training
-Description: Description of mrm_training
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/joshua/robot_ws_earlier/devel/lib 
-Requires: 

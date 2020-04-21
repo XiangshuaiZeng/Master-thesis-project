@@ -1,2 +1,0 @@
-model_checkpoint_path: "/home/joshua/robot_ws_earlier/src/mrm_training_force/training_results/PPO_model_new/torque_laser__-2.ckpt"
-all_model_checkpoint_paths: "/home/joshua/robot_ws_earlier/src/mrm_training_force/training_results/PPO_model_new/torque_laser__-2.ckpt"
