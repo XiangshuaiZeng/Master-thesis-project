@@ -1,5 +1,7 @@
-<<<<<<< HEAD
-# Master-project
-=======
-# Master-thesis-project
->>>>>>> 721dc2dc4f72b6bf572f4ca062a58aa5418b9a91
+## Master-thesis-project
+
+# Requirements:
+   - Python: 2.7
+   - ROS: Kinetic
+   - Tensorflow >= 1.3
+    
