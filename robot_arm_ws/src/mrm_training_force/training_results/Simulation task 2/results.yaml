@@ -1,0 +1,173 @@
+model1: turning_left_detecting_stuck1.ckpt
+
+D pipe: 125mm
+
+args = {
+    # these parameters should stay the same
+    "timesteps_per_batch" : 800,
+    "task" : "Mrm-v0",
+    "n_steps" : 1600,
+    "gamma" : 0.98,
+    "lamda" : 0.975,   # Best lambda value is lower than gamma, empirically lambda introduces far less bias than gamma for a reasonably accruate value function'
+    "vf_constraint" : 0.01,
+    "max_kl" : .01,
+    "coef_en": 0.01,  # coefficient for entropy bonus, only used in PPO
+    "lr_ph": 0.0006, # learning rate for adam, only used in PPO
+    "cg_damping" : 0.001,
+    "max_pathlength" : 200,
+    "max_iteration" : 200
+    }
+
+
+weight_r1: 500.0 # Weight for distance from desired point ( Huber loss )
+weight_r3: 0.3 # initial weight for distance from obstacles
+
+check robotic arm  every 2 time steps 
+threshold for taking random action: 0.03
+random actions range: [-0.2, 0.2]
+
+remarks: the robotic arm is still easily stuck, maybe should increase the threshold and the action range; also, change the reward function from Huber loss to Ln loss; maybe include the random action into the updates for the RL agent is a good idea.
+s
+----------------------------------------------------------------------------------------
+
+model2: turning_left_detecting_stuck2.ckpt
+
+D pipe: 125mm
+
+weight_r1: 1.5 # Weight for distance from desired point ( Ln loss )
+weight_r3: 0.3 # initial weight for distance from obstacles
+reach_lim_reward: -2000.0 # reward
+
+check robotic arm  every 3 time steps 
+threshold for taking random action: 0.1
+random actions range: [-1.0, 1.0]
+
+remarks: the random actions are included in the learning of the agent and it seems the convergence becomes very unstable. I think I shouldn't exclude the random actions into the learning.
+
+some observations: the policy first converged to a very nice optima where the robotic arm knows to stretch its joints to reach farther targets; however, it become worse somehow when the learning keeps going on and start having more collisions with the pipe; 
+okay, finally it converges to a nice optima again where the arm is able to reach farther targets.
+
+Testing results (success rate):
+	dis_target_left: [0.28, 0.34]
+	actions with noise and pertubation:   44/100
+	actions without noise and with pertubation:   42/100
+	actions with noise and without pertubation:   47/100
+
+	remarks: the end-effector is able to reach farther targets, however, not far enough, which mainly dues to the facts that the joints are "not willing" to go to larger position; next time the penalty on reaching joint limits will be decreased.
+----------------------------------------------------------------------------------------
+
+model3: turning_left_detecting_stuck3.ckpt
+
+D pipe: 120mm
+
+weight_r1: 1.6 # Weight for distance from desired point ( Ln loss )
+weight_r3: 0.3 # initial weight for distance from obstacles
+reach_lim_reward: -1000.0 # reward
+args["gamma"] : 0.99
+
+check robotic arm  every 3 time steps 
+threshold for taking random action: 0.1
+random actions range: [-1.0, 1.0]
+
+Remarks: failed since 120mm is too small and the simulation became unstable.
+
+Testing results (success rate):
+	actions with noise and pertubation:   /100
+	actions without noise and with pertubation:   /100
+	actions with noise and without pertubation:   /100
+
+---------------------------------------------------------------------------------------
+
+model4: turning_left_detecting_stuck4.ckpt
+
+D pipe: 120mm
+
+weight_r1: 1.5 # Weight for distance from desired point ( Ln loss )
+weight_r3: 0.3 # initial weight for distance from obstacles
+reach_lim_reward: -1000.0 # reward
+dis_target_left: [0.29, 0.38]
+
+check robotic arm  every 3 time steps 
+threshold for taking random action: 0.1
+random actions range: [-1.5, 1.5]
+
+Remarks: finally found out why the simulation often failed at the beginning, it is due to the lack of a function check_all_systems_ready() !! 
+
+Testing results (success rate):
+	actions with noise and pertubation:   /100
+	actions without noise and with pertubation:   /100
+	actions with noise and without pertubation:   /100
+
+-----------------------------------------------------------------------------------
+model8: turning_left_detecting_stuck8.ckpt
+
+D pipe: 125mm
+
+weight_r1: 1.5 # Weight for distance from desired point ( Ln loss )
+weight_r3: 0.3 # initial weight for distance from obstacles
+reach_lim_reward: -2000.0 # reward
+dis_target_left: [0.34, 0.36]
+
+No random actions.
+
+running time: 0.05s
+
+prismatic limits: [-0.01, 0.45]
+
+------------------------------------------------------------------------------------
+model7: turning_left_detecting_stuck7.ckpt
+
+parameters: same as model8 except
+reach_lim_reward: -1000.0 # reward
+running time: 0.1s
+
+dis_target_left: [0.32, 0.36]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

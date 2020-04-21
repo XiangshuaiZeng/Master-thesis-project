@@ -1,0 +1,2 @@
+model_checkpoint_path: "/home/joshua/robot_arm_ws/src/mrm_training_force/training_results/PPO_model/torque_control_sparse_laser_-7.ckpt"
+all_model_checkpoint_paths: "/home/joshua/robot_arm_ws/src/mrm_training_force/training_results/PPO_model/torque_control_sparse_laser_-7.ckpt"

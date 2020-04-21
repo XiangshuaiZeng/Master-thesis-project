@@ -1,0 +1,2 @@
+model_checkpoint_path: "/home/joshua/robot_arm_ws/src/mrm_training_force/training_results/TRPO_model/turning_left_various_angles.ckpt"
+all_model_checkpoint_paths: "/home/joshua/robot_arm_ws/src/mrm_training_force/training_results/TRPO_model/turning_left_various_angles.ckpt"

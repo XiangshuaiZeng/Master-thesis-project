@@ -1,0 +1,12 @@
+
+<launch>
+    <!-- Load the parameters for the algorithm -->
+    <rosparam command="load" file="$(find mrm_training)/config/predicting_params.yaml" />
+
+    <!-- launch the controllers -->
+    <node name="joints_controller" pkg="mrm_training" type="joints_controller.py" />
+
+    <!-- Launch the explore system -->
+    <node pkg="mrm_training" name="explore_turning" type="explore_turning.py" output="screen"/>
+
+</launch>

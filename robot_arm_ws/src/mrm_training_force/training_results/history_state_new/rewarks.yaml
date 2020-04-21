@@ -1,0 +1,2 @@
+remark1: the best coeff on laser data was 0.4 previously, but when the state vector changes, 0.4 becomes too big that the robot
+         can not reach the target anymore. Tried to decrease C_2 and finally 0.1 worked well.

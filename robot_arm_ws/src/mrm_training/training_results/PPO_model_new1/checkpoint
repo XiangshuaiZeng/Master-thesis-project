@@ -1,0 +1,2 @@
+model_checkpoint_path: "/home/joshua/robot_arm_ws/src/mrm_training/training_results/PPO_model_new1/pos_history_15.ckpt"
+all_model_checkpoint_paths: "/home/joshua/robot_arm_ws/src/mrm_training/training_results/PPO_model_new1/pos_history_15.ckpt"

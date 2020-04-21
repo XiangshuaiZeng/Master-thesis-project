@@ -1,0 +1,8 @@
+prefix=/home/joshua/high_fidelity_exp/devel
+
+Name: mrm_training_force
+Description: Description of mrm_training_force
+Version: 0.0.0
+Cflags: -I/home/joshua/high_fidelity_exp/devel/include
+Libs: -L/home/joshua/high_fidelity_exp/devel/lib 
+Requires: rospy message_runtime

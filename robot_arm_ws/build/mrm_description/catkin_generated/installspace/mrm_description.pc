@@ -1,0 +1,8 @@
+prefix=/home/joshua/robot_arm_ws/install
+
+Name: mrm_description
+Description: Description of mrm_description
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/joshua/robot_arm_ws/install/lib 
+Requires: rospy gazebo_ros

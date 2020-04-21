@@ -1,0 +1,2 @@
+mrm_description:mrm_training:mrm_training_force
+-DCATKIN_DEVEL_PREFIX=/home/joshua/robot_ws_earlier/devel -DCMAKE_INSTALL_PREFIX=/home/joshua/robot_ws_earlier/install -G Unix Makefiles

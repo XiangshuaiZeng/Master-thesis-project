@@ -1,0 +1,2 @@
+model_checkpoint_path: "/home/joshua/robot_arm_ws/src/mrm_training_force/training_results/PPO_model_new/torque_control_state_history2.ckpt"
+all_model_checkpoint_paths: "/home/joshua/robot_arm_ws/src/mrm_training_force/training_results/PPO_model_new/torque_control_state_history2.ckpt"

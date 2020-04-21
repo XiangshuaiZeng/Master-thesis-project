@@ -1,0 +1,2 @@
+model_checkpoint_path: "/home/joshua/high_fidelity_exp/src/mrm_training/training_results/PPO_model/pirate_pos_control7.ckpt"
+all_model_checkpoint_paths: "/home/joshua/high_fidelity_exp/src/mrm_training/training_results/PPO_model/pirate_pos_control7.ckpt"

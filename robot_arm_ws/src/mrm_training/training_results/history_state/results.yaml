@@ -1,0 +1,7 @@
+model1: use mini(laser)
+
+reward weights:
+    weight_r1: 1.5 # Weight for distance from desired point (Ln loss)
+
+    weight_r2: 1.0  # penalty if the joint position does not change much
+    weight_r3: 0.3 # weight for distance from obstacles

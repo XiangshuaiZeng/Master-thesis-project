@@ -1,0 +1,12 @@
+digraph G {
+"base_link" -> "link_01"[label="Broadcaster: /mrm/robot_state_publisher\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 11.258 sec old)\nBuffer length: 0.000 sec\n"];
+"world" -> "base_link"[label="Broadcaster: /mrm/robot_state_publisher\nAverage rate: 50.202 Hz\nMost recent transform: 11.244 ( 0.014 sec old)\nBuffer length: 4.960 sec\n"];
+"link_04" -> "laser_link"[label="Broadcaster: /mrm/robot_state_publisher\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 11.258 sec old)\nBuffer length: 0.000 sec\n"];
+"link_03" -> "link_04"[label="Broadcaster: /mrm/robot_state_publisher\nAverage rate: 50.202 Hz\nMost recent transform: 11.244 ( 0.014 sec old)\nBuffer length: 4.960 sec\n"];
+"link_01" -> "link_02"[label="Broadcaster: /mrm/robot_state_publisher\nAverage rate: 50.202 Hz\nMost recent transform: 11.244 ( 0.014 sec old)\nBuffer length: 4.960 sec\n"];
+"link_02" -> "link_03"[label="Broadcaster: /mrm/robot_state_publisher\nAverage rate: 50.202 Hz\nMost recent transform: 11.244 ( 0.014 sec old)\nBuffer length: 4.960 sec\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 11.258"[ shape=plaintext ] ;
+ }->"world";
+}

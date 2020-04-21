@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <!-- load gazebo with an empty world -->
+    <arg name="debug" default="false"/>
+    <arg name="gui" default="true"/>
+    <arg name="headless" default="false"/>
+    <arg name="pause" default="false"/>
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    	<arg name="world_name" value="$(find mrm_description)/worlds/world1.world"/>
+        <arg name="debug" value="$(arg debug)" />
+        <arg name="gui" value="$(arg gui)" />
+        <arg name="paused" value="$(arg pause)"/>
+        <arg name="use_sim_time" value="true"/>
+        <arg name="headless" value="$(arg headless)"/>
+        <arg name="verbose" value="true"/>
+    </include>
+
+        <!-- spawn the model -->
+    	<param name="robot_description" command="$(find xacro)/xacro --inorder '$(find mrm_description)/urdf/pirate.xacro'" />
+
+    	<arg name="x" default="0"/>
+    	<arg name="y" default="0"/>
+    	<arg name="z" default="0"/>
+
+    	<node name="mybot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
+    		    args="-urdf -param robot_description -model mrm -x $(arg x) -y $(arg y) -z $(arg z)" />
+
+        <!-- load controllers -->
+        <rosparam command="load" file="$(find mrm_description)/config/joints.yaml" />
+
+        <!-- node name="rqt_reconfigure" pkg="rqt_reconfigure" type="rqt_reconfigure" / -->
+        <node name="rqt_publisher" pkg="rqt_publisher" type="rqt_publisher" />
+
+        <!-- combine joint values -->
+	    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher">
+	    	<param name="publish_frequency" value="100" />
+	    </node>
+
+	    <!-- publish the position of end_effector -->
+	    <node name="end_effector_pos" pkg="mrm_description" type="end_effector_pos.py" />
+
+</launch>

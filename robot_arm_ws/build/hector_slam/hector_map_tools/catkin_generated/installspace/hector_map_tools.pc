@@ -1,0 +1,8 @@
+prefix=/home/joshua/robot_arm_ws/install
+
+Name: hector_map_tools
+Description: Description of hector_map_tools
+Version: 0.3.5
+Cflags: -I/home/joshua/robot_arm_ws/install/include -I/usr/include/eigen3
+Libs: -L/home/joshua/robot_arm_ws/install/lib 
+Requires: nav_msgs

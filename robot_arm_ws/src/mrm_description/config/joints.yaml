@@ -1,0 +1,7 @@
+position_controllers:
+    joint_01: {Kp: 16, Ki: 0, Kd: 0.4}
+    joint_02: {Kp: 12, Ki: 0, Kd: 0.2}
+    joint_03: {Kp: 8, Ki: 0, Kd: 0.2}
+    prismatic: {Kp: 25, Ki: 0, Kd: 10}
+# step size for pid controllers
+ts: 0.01

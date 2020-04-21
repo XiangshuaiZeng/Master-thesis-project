@@ -1,0 +1,19 @@
+model:  torque_control_state_history2
+    # weight_r1: 500.0 # Weight for distance from desired point (Huber loss)
+    weight_r1: 1.5 # Weight for distance from desired point (Ln loss)
+
+    weight_r2: 1.0  # penalty if the joint position does not change much
+    weight_r3: 0.3 # weight for distance from obstacles
+
+
+model:  torque_control_state_history3
+    weight_r1: 1.5 # Weight for distance from desired point (Ln loss)
+
+    weight_r2: 1.5  # penalty if the joint position does not change much
+    weight_r3: 0.3 # weight for distance from obstacles
+
+model:  torque_control_state_history4
+    weight_r1: 1.5 # Weight for distance from desired point (Ln loss)
+
+    weight_r2: 0.5  # penalty if the joint position does not change much
+    weight_r3: 0.3 # weight for distance from obstacles

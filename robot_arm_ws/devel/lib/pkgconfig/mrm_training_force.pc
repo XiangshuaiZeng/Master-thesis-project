@@ -1,0 +1,8 @@
+prefix=/home/joshua/robot_arm_ws/devel
+
+Name: mrm_training_force
+Description: Description of mrm_training_force
+Version: 0.0.0
+Cflags: -I/home/joshua/robot_arm_ws/devel/include
+Libs: -L/home/joshua/robot_arm_ws/devel/lib 
+Requires: rospy message_runtime

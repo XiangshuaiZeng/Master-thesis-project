@@ -1,0 +1,166 @@
+<?xml version="1.0" ?>
+
+<robot name="mrm" xmlns:xacro="http://www.ros.org/wiki/xacro">  <!--the intepreter -->
+
+	<!-- BGN - Include -->
+	<xacro:include filename="$(find mrm_description)/urdf/links_joints.xacro" />
+	<!-- END - Include -->
+
+    <!-- World link -->
+    <link name="world">
+       <origin rpy="0 0 0" xyz="0 0 0" />
+    </link>
+
+	<!-- a prismatic joint where the base link can move long its z axis -->
+    <m_joint name="prismatic" type="prismatic"
+		axis_xyz="0 0 1"
+		origin_rpy="1.57 3.1416 -2.09439510239" origin_xyz="0.4080127018922193 -0.706698729810778 0.03"
+		parent="world" child="base_link"
+		limit_e="40" limit_l="-0.4" limit_u="0.4" limit_v="0.4"
+		damping="0.2" friction="0.02"/>
+
+		<m_link_box name="base_link"
+					origin_rpy="0 0 0" origin_xyz="0 0.01 0" size="0.03 0.03 0.02"
+					mass="0.15"
+					ixx="0.01" ixy="0" ixz="0"
+					iyy="0.01" iyz="0"
+					izz="0.01"/>
+
+		<m_link_mesh name="link_01"
+					origin_rpy="0 0 0" origin_xyz="0 0 0.0"
+					mass="0.144"
+					ixx="0.002" ixy="0" ixz="0"
+					iyy="0.002" iyz="0"
+					izz="0.001"
+					meshfile="package://mrm_description/meshes/bottom_link.stl"
+					meshscale="0.001 0.001 0.001" />   <!-- the stl is created by mm -->
+
+		<joint name="base_link__link_01" type="fixed">
+	        <parent link="base_link"/>
+	        <child link="link_01"/>
+	        <origin xyz="0 0.01 0.01" rpy="0 0 0"/>
+	    </joint>
+
+	   <gazebo reference="link_01">
+		   <kp>100000.0</kp>
+	 	  <kd>1000.0</kd>
+	 	  <mu1>0.02</mu1>
+	 	  <mu2>0.02</mu2>
+		   <material>Gazebo/Red</material>
+		   <self_collide>false</self_collide>
+	    </gazebo>
+
+
+		<m_joint name="joint_01" type="revolute"
+			axis_xyz="0 1 0"
+			origin_rpy="0 0 0" origin_xyz="0 0 0.05"
+			parent="link_01" child="link_02"
+			limit_e="10" limit_l="-2.0" limit_u="2.0" limit_v="1"
+			damping="0.05" friction="0.0"/>
+
+		<m_link_mesh name="link_02"
+					origin_rpy="0 0 0" origin_xyz="0 0 0.01"
+					mass="0.144"
+					ixx="0.002" ixy="0" ixz="0"
+					iyy="0.002" iyz="0"
+					izz="0.001"
+					meshfile="package://mrm_description/meshes/link.stl"
+					meshscale="0.001 0.001 0.001" />   <!-- the stl is created by mm -->
+
+		<gazebo reference="link_02">
+			<kp>100000.0</kp>
+	  	  <kd>1000.0</kd>
+		  <mu1>0.02</mu1>
+	 	  <mu2>0.02</mu2>
+	 	   <material>Gazebo/Red</material>
+		   <self_collide>false</self_collide>
+	    </gazebo>
+
+		<m_joint name="joint_02" type="revolute"
+			axis_xyz="0 1 0"
+			origin_rpy="0 0 0" origin_xyz="0 0 0.10"
+			parent="link_02" child="link_03"
+			limit_e="10" limit_l="-2.0" limit_u="2.0" limit_v="1"
+			damping="0.05" friction="0.0"/>
+
+
+		<m_link_mesh name="link_03"
+					origin_rpy="0 0 0" origin_xyz="0 0 0.01"
+					mass="0.144"
+					ixx="0.002" ixy="0" ixz="0"
+					iyy="0.002" iyz="0"
+					izz="0.001"
+					meshfile="package://mrm_description/meshes/link.stl"
+					meshscale="0.001 0.001 0.001" />   <!-- the stl is created by mm -->
+
+		<gazebo reference="link_03">
+			<kp>100000.0</kp>
+	  	  <kd>1000.0</kd>
+		  <mu1>0.02</mu1>
+		 <mu2>0.02</mu2>
+	 	   <material>Gazebo/Red</material>
+		   <self_collide>false</self_collide>
+	    </gazebo>
+
+		<m_joint name="joint_03" type="revolute"
+			axis_xyz="0 0 1"
+			origin_rpy="1.5708 -1.5708 0" origin_xyz="0 0 0.10"
+			parent="link_03" child="link_04"
+			limit_e="10" limit_l="-2.0" limit_u="2.0" limit_v="1"
+			damping="0.05" friction="0.0"/>
+
+		<m_link_mesh name="link_04"
+					origin_rpy="0 1.57 0" origin_xyz="0.01 0 0"
+					mass="0.144"
+					ixx="0.002" ixy="0" ixz="0"
+					iyy="0.002" iyz="0"
+					izz="0.001"
+					meshfile="package://mrm_description/meshes/end_link.stl"
+					meshscale="0.001 0.001 0.001" />   <!-- the stl is created by mm -->
+
+		<gazebo reference="link_04">
+			<kp>100000.0</kp>
+	  	  <kd>1000.0</kd>
+		  <mu1>0.02</mu1>
+	 	  <mu2>0.02</mu2>
+	 	   <material>Gazebo/Red</material>
+		   <self_collide>false</self_collide>
+	    </gazebo>
+
+		<joint name="link_04__laser_scanner" type="fixed">
+	        <parent link="link_04"/>
+	        <child link="laser_link"/>
+	        <origin xyz="0.10 0 0" rpy="0 0 0"/>
+	    </joint>
+
+		<m_link_box name="laser_link"
+					origin_rpy="0 0 0" origin_xyz="0 0 0" size="0.005 0.005 0.005"
+					mass="0.1"
+					ixx="0.001" ixy="0" ixz="0"
+					iyy="0.001" iyz="0"
+					izz="0.001"/>
+
+		<gazebo reference="laser_link">
+			<kp>100000.0</kp>
+	  	  <kd>1000.0</kd>
+		  <mu1>0.02</mu1>
+		 <mu2>0.02</mu2>
+			<selfCollide>true</selfCollide>
+	 	   <material>Gazebo/White</material>
+	    </gazebo>
+
+	    <gazebo>
+			<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+				<legacyModeNS>false</legacyModeNS>
+			</plugin>
+		</gazebo>
+
+		<gazebo>
+	        <plugin name="joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
+	          <jointName>joint_01, joint_02, joint_03, prismatic</jointName>
+	          <updateRate>100.0</updateRate>
+	          <alwaysOn>true</alwaysOn>
+	        </plugin>
+	    </gazebo>
+
+	</robot>

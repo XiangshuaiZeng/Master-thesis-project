@@ -1,0 +1,8 @@
+prefix=/home/joshua/dynamixel_control/devel
+
+Name: simple_control
+Description: Description of simple_control
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/joshua/dynamixel_control/devel/lib 
+Requires: 

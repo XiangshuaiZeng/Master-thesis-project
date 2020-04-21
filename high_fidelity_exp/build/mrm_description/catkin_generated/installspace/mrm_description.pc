@@ -1,0 +1,8 @@
+prefix=/home/joshua/high_fidelity_exp/install
+
+Name: mrm_description
+Description: Description of mrm_description
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/joshua/high_fidelity_exp/install/lib 
+Requires: rospy gazebo_ros

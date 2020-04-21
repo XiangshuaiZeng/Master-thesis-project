@@ -1,0 +1,162 @@
+D of pipe: 140mm
+
+PPO:
+
+model1: 
+/PPO_model/turning_left_various_angles.ckpt
+
+args = {
+    # these parameters should stay the same
+    "timesteps_per_batch" : 800,
+    "task" : "Mrm-v0",
+    "n_steps" : 1600,
+    "gamma" : 0.98,
+    "lamda" : 0.975,   # Best lambda value is lower than gamma, empirically lambda introduces far less bias than gamma for a reasonably accruate value function'
+    "vf_constraint" : 0.01,
+    "max_kl" : .01,
+    "coef_en": 0.01,  # coefficient for entropy bonus, only used in PPO
+    "lr_ph": 0.0006, # learning rate for adam, only used in PPO
+    "cg_damping" : 0.001,
+    "max_pathlength" : 200,
+    "max_iteration" : 200
+    }
+
+weights on the rewards: 300 for target-reaching and 0.2 for obstacle-avoiding
+
+success_rate with noise on action: 58/100
+             without:  41/100     
+
+The noise on the action gave some randomness to the movement so that the suitations where the robot is stuck decrease.
+
+It is observed that most of the time when the target is not reached, it is because the target position is too far away. However, the robotic arm should be able to touch it within that distance, the problem is the second and the third joints stop moving after some distance is reached. It seems the exploration is not enough.
+
+---------------------------------------------------------------
+
+model2: 
+/PPO_model/turning_left_various_angles1.ckpt
+
+weights on the rewards: 500 for target-reaching and 0.2 for obstacle-avoiding
+
+target distance: the area where the target is randomly placed is farther than that in model1
+
+Other parameters: same as before
+
+success_rate with noise on action: 81/100
+             without:  72/100
+
+Training time: 3 hours
+ 
+---------------------------------------------------------------
+
+model3: 
+/PPO_model/turning_left_various_angles2.ckpt
+
+parameters: all of the setups are the same except the diameter of the pipe is reduced from 140mm to 125mm.
+
+success_rate with noise on action: %
+             without:  %
+
+Training time: 3 hours
+
+-------------------------------------------------------------------
+
+model4: 
+/PPO_model/turning_left_various_angles3.ckpt
+
+parameters: all of the setups are the same as in model2 except the turning angle is between 60 and 120 degrees.
+
+success_rate with noise on action: 76/100
+             without:  56/100
+
+Training time: 3 hours
+
+Remarks: it is much easier for the arm to be at a locked position when the action is without noise.
+
+------------------------------------------------------------------------------------------------------
+
+model5: 
+/PPO_model/turning_left_various_angles4.ckpt
+
+parameters: all of the setups are the same as in model3 except the penalty from the laser scanner is higher
+
+weights on the rewards: 500 for target-reaching and 0.8 for obstacle-avoiding
+
+success_rate with noise on action: 80/100
+             without:  44/100
+
+Training time: 3 hours
+
+Remarks: it is found in the validation that the end-effedctor is very "unwilling" to get close to the pipe so that the other parts of the robotic arm become easier to hit the pipe; so in the next model, I decide to decrease the coefficient on the penalty for laser data. 
+
+-------------------------------------------------------------------------------------------------------
+
+model6: 
+/PPO_model/turning_left_various_angles5.ckpt
+
+parameters: same as model4 except the diameter is decreased to 125mm; the target is even farther and the friction between the pipe and the robot is reduced from 0.1 to 0.02 (values for mu1, mu2); also number of iterations is increased.
+
+weights on the rewards: 500 for target-reaching and 0.3 for obstacle-avoiding
+
+
+success_rate with noise on action: /100
+             without:   26/100   (due to the arm is stuck at some point)
+
+Training time: 3 hours
+
+Remarks: the robotic arm cannot touch the target because there is always collisions happening after the end-effctor reaches some certain distance.  It seems the reduction of frection does not work, I have go to next phase.
+
+------------------------------------------------------------------------------------------------------
+
+model7: 
+/PPO_model/turning_left_various_angles6.ckpt
+
+parameters: same as model5 except the reward changes from Huber loss to Ln loss
+
+weights on the rewards: 1.6 for target-reaching and 0.3 for obstacle-avoiding
+
+success_rate with noise on action: /100
+             without:   /100  
+
+Training time: 3 hours
+
+Remarks: it is not like the longer the training, the better the model will be. Sometimes too much learning might overfit the policy.
+Remember to test the best model in pipes with different angles and diameters
+
+
+*************************************************************************************************************************
+TRPO:
+
+model1: 
+/TRPO_model/turning_left_various_angles.ckpt
+
+parameters: same as PPO model1
+
+success_rate with noise on action: 42%
+             without:  26%  
+
+TRPO model is easier to make the robot stuck in the pipe
+
+Brief comparison between model1 from PPO and TRPO:
+  
+	trpo reward: 
+	    mean: -541 
+	    std: 446
+
+	ppo reward: 
+	    mean: -330 
+	    std: 346
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
